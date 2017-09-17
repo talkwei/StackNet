@@ -1751,7 +1751,10 @@ public class singleVanilla2hnn implements estimator,regressor,Runnable {
 			
 			// end of SGD
 		}
-
+		sdataset=null;
+		fsdataset=null;
+		dataset=null;
+		System.gc();
 	}
 	@Override
 	public void fit(fsmatrix data) {
@@ -2181,7 +2184,10 @@ public class singleVanilla2hnn implements estimator,regressor,Runnable {
 				
 				// end of SGD
 			}
-
+		sdataset=null;
+		fsdataset=null;
+		dataset=null;
+		System.gc();
 		}
 	
 	@Override
@@ -2625,7 +2631,10 @@ public class singleVanilla2hnn implements estimator,regressor,Runnable {
 			
 			// end of SGD
 		}
-
+		sdataset=null;
+		fsdataset=null;
+		dataset=null;
+		System.gc();
 	}
 	@Override
 	public String GetType() {
@@ -2777,13 +2786,13 @@ public class singleVanilla2hnn implements estimator,regressor,Runnable {
 				else if (metric.equals("maxim_Iteration")) {this.maxim_Iteration=Integer.parseInt(value);}
 				else if (metric.equals("init_values")) {this.init_values=Double.parseDouble(value);}
 				else if (metric.equals("smooth")) {this.smooth=Double.parseDouble(value);}
-				else if (metric.equals("usescale")) {this.usescale=(value.equals("True")?true:false);}
-				else if (metric.equals("shuffle")) {this.shuffle=(value.equals("True")?true:false);}
+				else if (metric.equals("usescale")) {this.usescale=(value.toLowerCase().equals("true")?true:false);}
+				else if (metric.equals("shuffle")) {this.shuffle=(value.toLowerCase().equals("true")?true:false);}
 				else if (metric.equals("learn_rate")) {this.learn_rate=Double.parseDouble(value);}
-				else if (metric.equals("copy")) {this.copy=(value.equals("True")?true:false);}
+				else if (metric.equals("copy")) {this.copy=(value.toLowerCase().equals("true")?true:false);}
 				else if (metric.equals("seed")) {this.seed=Integer.parseInt(value);}
 				else if (metric.equals("tolerance ")) {this.tolerance =Double.parseDouble(value);}
-				else if (metric.equals("verbose")) {this.verbose=(value.equals("True")?true:false)   ;}		
+				else if (metric.equals("verbose")) {this.verbose=(value.toLowerCase().equals("true")?true:false)   ;}		
 				
 			}
 			
@@ -2883,6 +2892,18 @@ public class singleVanilla2hnn implements estimator,regressor,Runnable {
 		this.target=data;
 	}
 	
+	@Override
+	public int getSeed() {
+		return this.seed;}
 	
+	@Override
+	public void AddClassnames(String names[]){
+		//none
+	}
+	
+	@Override
+	public void set_target(fsmatrix fstarget){
+		
+	}
 	
 }

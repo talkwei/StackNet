@@ -2019,7 +2019,10 @@ return predictions;
 
 			
 			
-
+		sdataset=null;
+		fsdataset=null;
+		dataset=null;
+		System.gc();
 		
 		
 	}
@@ -2497,7 +2500,10 @@ return predictions;
 			
 			
 
-		
+		sdataset=null;
+		fsdataset=null;
+		dataset=null;
+		System.gc();	
 		
 	}
 
@@ -2680,7 +2686,7 @@ return predictions;
 	                 z1[j] = this.W0s[cc++];
 	             }
 	             
-	            for (int z=data.indexpile[i]; z<=data.indexpile[i+1]; z++ ) {
+	            for (int z=data.indexpile[i]; z<data.indexpile[i+1]; z++ ) {
 	            	int d=data.mainelementpile[z];
 	            	v=data.valuespile[z];
 
@@ -2915,7 +2921,7 @@ return predictions;
     	         
     	        
                 // update weights related to non-zero input units
-	            for (int z=data.indexpile[i]; z<=data.indexpile[i+1]; z++ ) {
+	            for (int z=data.indexpile[i]; z<data.indexpile[i+1]; z++ ) {
 	            	int d=data.mainelementpile[z];
 	            	v=data.valuespile[z];
                 	 if ( v == 0){
@@ -2972,7 +2978,10 @@ return predictions;
 
 			
 			
-
+		sdataset=null;
+		fsdataset=null;
+		dataset=null;
+		System.gc();
 		
 		
 	}
@@ -3044,7 +3053,7 @@ return predictions;
 
 	@Override
 	public boolean IsRegressor() {
-		return  true ;
+		return true ;
 	}
 
 	@Override
@@ -3152,13 +3161,13 @@ return predictions;
 				else if (metric.equals("maxim_Iteration")) {this.maxim_Iteration=Integer.parseInt(value);}
 				else if (metric.equals("init_values")) {this.init_values=Double.parseDouble(value);}
 				else if (metric.equals("smooth")) {this.smooth=Double.parseDouble(value);}
-				else if (metric.equals("usescale")) {this.usescale=(value.equals("True")?true:false);}
-				else if (metric.equals("shuffle")) {this.shuffle=(value.equals("True")?true:false);}
+				else if (metric.equals("usescale")) {this.usescale=(value.toLowerCase().equals("true")?true:false);}
+				else if (metric.equals("shuffle")) {this.shuffle=(value.toLowerCase().equals("true")?true:false);}
 				else if (metric.equals("learn_rate")) {this.learn_rate=Double.parseDouble(value);}
-				else if (metric.equals("copy")) {this.copy=(value.equals("True")?true:false);}
+				else if (metric.equals("copy")) {this.copy=(value.toLowerCase().equals("true")?true:false);}
 				else if (metric.equals("seed")) {this.seed=Integer.parseInt(value);}
 				else if (metric.equals("tolerance ")) {this.tolerance =Double.parseDouble(value);}
-				else if (metric.equals("verbose")) {this.verbose=(value.equals("True")?true:false)   ;}		
+				else if (metric.equals("verbose")) {this.verbose=(value.toLowerCase().equals("true")?true:false)   ;}		
 				
 			}
 			
@@ -3237,5 +3246,17 @@ return predictions;
 		}
 		this.target=data;
 	}
+	@Override
+	public int getSeed() {
+		return this.seed;}
 	
+	@Override
+	public void AddClassnames(String names[]){
+		//none
+	}
+	
+	@Override
+	public void set_target(fsmatrix fstarget){
+		this.fstarget=fstarget;
+	}
 }
